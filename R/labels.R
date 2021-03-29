@@ -1,16 +1,13 @@
 #' Generate alt text from the title, subtitle and caption of a ggplot
 #'
 #' @param obj a ggplot
-#'
-#' @return
 #' @export
-gen_alttext <- function(obj) {
+alt_text <- function(obj) {
 
   labels <- obj$labels
 
   #remove html
   labels <- lapply(labels, function(x) gsub("<.*?>", "", x))
-
   #remove markdown * or **
   labels <- lapply(labels, function(x) gsub("\\*+", "", x))
   #remove markdown _ or __
