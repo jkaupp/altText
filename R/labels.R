@@ -4,9 +4,19 @@
 #' @export
 alt_text <- function(obj) {
 
-  labels <- obj$labels
+  if(inherits(obj, "patchwork")) {
 
-  #remove html
+    labels <- list(title = obj$patches$annotation$title,
+                   subtitle = obj$patches$annotation$subtitle,
+                   caption = obj$patches$annotation$caption)
+
+  } else {
+
+     labels <- obj$labels
+
+  }
+
+  #remove html tags
   labels <- lapply(labels, function(x) gsub("<.*?>", "", x))
   #remove markdown * or **
   labels <- lapply(labels, function(x) gsub("\\*+", "", x))
